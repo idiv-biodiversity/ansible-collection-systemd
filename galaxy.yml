@@ -1,0 +1,25 @@
+---
+
+namespace: idiv_biodiversity
+name: systemd
+version: 0.1.0
+readme: README.md
+authors:
+  - Christian Krause <christian.krause@idiv.de>
+description: install and configure systemd components
+license_file: LICENSE
+tags:
+  - linux
+  - systemd
+dependencies: { }
+repository: https://github.com/idiv-biodiversity/ansible-collection-systemd
+documentation: https://github.com/idiv-biodiversity/ansible-collection-systemd
+homepage: https://github.com/idiv-biodiversity/ansible-collection-systemd
+issues: https://github.com/idiv-biodiversity/ansible-collection-systemd/issues
+build_ignore:
+  - .config
+  - .github
+  - .yamllint
+  - roles/*/molecule
+
+...
