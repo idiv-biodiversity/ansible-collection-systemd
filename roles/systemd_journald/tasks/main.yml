@@ -1,0 +1,67 @@
+---
+
+# -----------------------------------------------------------------------------
+# install
+# -----------------------------------------------------------------------------
+
+- name: install systemd
+  ansible.builtin.package:
+    name: systemd
+    state: present
+  become: yes
+  tags:
+    - install
+
+# -----------------------------------------------------------------------------
+# config
+# -----------------------------------------------------------------------------
+
+- name: create conf.d directory
+  ansible.builtin.file:
+    dest: /etc/systemd/journald.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+  tags:
+    - config
+
+- name: configure systemd-journald
+  ansible.builtin.template:
+    src: journald.conf.j2
+    dest: /etc/systemd/journald.conf.d/60-ansible.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  register: __systemd_journald_configuration
+  tags:
+    - config
+
+# -----------------------------------------------------------------------------
+# service
+# -----------------------------------------------------------------------------
+
+- name: start systemd-journald service
+  ansible.builtin.systemd:
+    name: systemd-journald
+    state: >-
+      {{
+        __systemd_journald_configuration.changed |
+          default(False) |
+          ternary("restarted", "started")
+      }}
+  become: yes
+  tags:
+    - service
+
+- name: enable systemd-journald service
+  ansible.builtin.systemd:
+    name: systemd-journald
+    enabled: yes
+  become: yes
+  tags:
+    - service
+
+...

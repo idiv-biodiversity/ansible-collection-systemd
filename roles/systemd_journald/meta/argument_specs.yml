@@ -1,0 +1,97 @@
+---
+
+argument_specs:
+  main:
+    options:
+
+      systemd_journald_audit:
+        type: bool
+
+      systemd_journald_compress:
+        type: bool
+
+      systemd_journald_forwardtoconsole:
+        type: bool
+
+      systemd_journald_forwardtokmsg:
+        type: bool
+
+      systemd_journald_forwardtosyslog:
+        type: bool
+
+      systemd_journald_forwardtowall:
+        type: bool
+
+      systemd_journald_linemax:
+        type: str
+
+      systemd_journald_maxfilesec:
+        type: str
+
+      systemd_journald_maxlevelconsole:
+        type: str
+
+      systemd_journald_maxlevelkmsg:
+        type: str
+
+      systemd_journald_maxlevelstore:
+        type: str
+
+      systemd_journald_maxlevelsyslog:
+        type: str
+
+      systemd_journald_maxlevelwall:
+        type: str
+
+      systemd_journald_maxretentionsec:
+        type: str
+
+      systemd_journald_ratelimitburst:
+        type: str
+
+      systemd_journald_ratelimitintervalsec:
+        type: str
+
+      systemd_journald_readkmsg:
+        type: bool
+
+      systemd_journald_runtimekeepfree:
+        type: str
+
+      systemd_journald_runtimemaxfiles:
+        type: str
+
+      systemd_journald_runtimemaxfilesize:
+        type: str
+
+      systemd_journald_runtimemaxuse:
+        type: str
+
+      systemd_journald_seal:
+        type: bool
+
+      systemd_journald_splitmode:
+        type: str
+
+      systemd_journald_storage:
+        type: str
+
+      systemd_journald_syncintervalsec:
+        type: str
+
+      systemd_journald_systemkeepfree:
+        type: str
+
+      systemd_journald_systemmaxfiles:
+        type: str
+
+      systemd_journald_systemmaxfilesize:
+        type: str
+
+      systemd_journald_systemmaxuse:
+        type: str
+
+      systemd_journald_ttypath:
+        type: str
+
+...

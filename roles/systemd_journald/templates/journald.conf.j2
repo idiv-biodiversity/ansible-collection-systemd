@@ -1,0 +1,93 @@
+# {{ ansible_managed }}
+
+[Journal]
+{% if systemd_journald_storage is defined %}
+Storage={{ systemd_journald_storage }}
+{% endif %}
+{% if systemd_journald_compress is defined %}
+Compress={{ systemd_journald_compress }}
+{% endif %}
+{% if systemd_journald_seal is defined %}
+Seal={{ systemd_journald_seal }}
+{% endif %}
+{% if systemd_journald_splitmode is defined %}
+SplitMode={{ systemd_journald_splitmode }}
+{% endif %}
+{% if systemd_journald_syncintervalsec is defined %}
+SyncIntervalSec={{ systemd_journald_syncintervalsec }}
+{% endif %}
+{% if systemd_journald_ratelimitintervalsec is defined %}
+RateLimitIntervalSec={{ systemd_journald_ratelimitintervalsec }}
+{% endif %}
+{% if systemd_journald_ratelimitburst is defined %}
+RateLimitBurst={{ systemd_journald_ratelimitburst }}
+{% endif %}
+{% if systemd_journald_systemmaxuse is defined %}
+SystemMaxUse={{ systemd_journald_systemmaxuse }}
+{% endif %}
+{% if systemd_journald_systemkeepfree is defined %}
+SystemKeepFree={{ systemd_journald_systemkeepfree }}
+{% endif %}
+{% if systemd_journald_systemmaxfilesize is defined %}
+SystemMaxFileSize={{ systemd_journald_systemmaxfilesize }}
+{% endif %}
+{% if systemd_journald_systemmaxfiles is defined %}
+SystemMaxFiles={{ systemd_journald_systemmaxfiles }}
+{% endif %}
+{% if systemd_journald_runtimemaxuse is defined %}
+RuntimeMaxUse={{ systemd_journald_runtimemaxuse }}
+{% endif %}
+{% if systemd_journald_runtimekeepfree is defined %}
+RuntimeKeepFree={{ systemd_journald_runtimekeepfree }}
+{% endif %}
+{% if systemd_journald_runtimemaxfilesize is defined %}
+RuntimeMaxFileSize={{ systemd_journald_runtimemaxfilesize }}
+{% endif %}
+{% if systemd_journald_runtimemaxfiles is defined %}
+RuntimeMaxFiles={{ systemd_journald_runtimemaxfiles }}
+{% endif %}
+{% if systemd_journald_maxretentionsec is defined %}
+MaxRetentionSec={{ systemd_journald_maxretentionsec }}
+{% endif %}
+{% if systemd_journald_maxfilesec is defined %}
+MaxFileSec={{ systemd_journald_maxfilesec }}
+{% endif %}
+{% if systemd_journald_forwardtosyslog is defined %}
+ForwardToSyslog={{ systemd_journald_forwardtosyslog }}
+{% endif %}
+{% if systemd_journald_forwardtokmsg is defined %}
+ForwardToKMsg={{ systemd_journald_forwardtokmsg }}
+{% endif %}
+{% if systemd_journald_forwardtoconsole is defined %}
+ForwardToConsole={{ systemd_journald_forwardtoconsole }}
+{% endif %}
+{% if systemd_journald_forwardtowall is defined %}
+ForwardToWall={{ systemd_journald_forwardtowall }}
+{% endif %}
+{% if systemd_journald_ttypath is defined %}
+TTYPath={{ systemd_journald_ttypath }}
+{% endif %}
+{% if systemd_journald_maxlevelstore is defined %}
+MaxLevelStore={{ systemd_journald_maxlevelstore }}
+{% endif %}
+{% if systemd_journald_maxlevelsyslog is defined %}
+MaxLevelSyslog={{ systemd_journald_maxlevelsyslog }}
+{% endif %}
+{% if systemd_journald_maxlevelkmsg is defined %}
+MaxLevelKMsg={{ systemd_journald_maxlevelkmsg }}
+{% endif %}
+{% if systemd_journald_maxlevelconsole is defined %}
+MaxLevelConsole={{ systemd_journald_maxlevelconsole }}
+{% endif %}
+{% if systemd_journald_maxlevelwall is defined %}
+MaxLevelWall={{ systemd_journald_maxlevelwall }}
+{% endif %}
+{% if systemd_journald_linemax is defined %}
+LineMax={{ systemd_journald_linemax }}
+{% endif %}
+{% if systemd_journald_readkmsg is defined %}
+ReadKMsg={{ systemd_journald_readkmsg }}
+{% endif %}
+{% if systemd_journald_audit is defined %}
+Audit={{ systemd_journald_audit }}
+{% endif %}

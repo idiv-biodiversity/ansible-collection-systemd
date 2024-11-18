@@ -1,0 +1,86 @@
+---
+
+- name: verify
+  hosts: all
+  tasks:
+
+    # -------------------------------------------------------------------------
+    # check package
+    # -------------------------------------------------------------------------
+
+    - name: check package installation
+      ansible.builtin.package:
+        name: systemd
+        state: present
+      check_mode: yes
+      register: __systemd_journald_installation
+
+    - name: debug package installation
+      ansible.builtin.debug:
+        var: __systemd_journald_installation
+
+    - name: assert on package installation
+      ansible.builtin.assert:
+        that:
+          - not __systemd_journald_installation.failed
+          - not __systemd_journald_installation.changed
+        success_msg: 'packages are installed'
+
+    # -------------------------------------------------------------------------
+    # check configuration
+    # -------------------------------------------------------------------------
+
+    - name: check configuration file
+      ansible.builtin.stat:
+        path: /etc/systemd/journald.conf.d/60-ansible.conf
+        get_attributes: no
+        get_checksum: no
+        get_mime: no
+      check_mode: yes
+      register: __systemd_journald_configuration
+
+    - name: debug configuration file
+      ansible.builtin.debug:
+        var: __systemd_journald_configuration
+
+    - name: assert on configuration file
+      ansible.builtin.assert:
+        that:
+          - __systemd_journald_configuration.stat.exists
+        success_msg: 'configuration file exists'
+
+    # -------------------------------------------------------------------------
+    # check service
+    # -------------------------------------------------------------------------
+
+    - name: check service
+      ansible.builtin.service:
+        name: systemd-journald
+        enabled: yes
+        state: started
+      check_mode: yes
+      register: __systemd_journald_service
+
+    - name: debug service
+      ansible.builtin.debug:
+        var: __systemd_journald_service
+
+    - name: assert on service
+      ansible.builtin.assert:
+        that:
+          - not __systemd_journald_service.failed
+          - not __systemd_journald_service.changed
+          - __systemd_journald_service.state == 'started'
+          - __systemd_journald_service.enabled
+        success_msg: 'service is both enabled and started'
+
+    # -------------------------------------------------------------------------
+    # check commands
+    # -------------------------------------------------------------------------
+
+    - name: check if journalctl works
+      ansible.builtin.command: journalctl -n 10
+      become: yes
+      changed_when: no
+
+...
