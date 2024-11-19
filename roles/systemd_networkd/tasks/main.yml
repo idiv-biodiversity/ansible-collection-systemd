@@ -1,0 +1,61 @@
+---
+
+# -----------------------------------------------------------------------------
+# install
+# -----------------------------------------------------------------------------
+
+- name: install systemd
+  ansible.builtin.package:
+    name: systemd
+    state: present
+  become: yes
+  tags:
+    - install
+
+# -----------------------------------------------------------------------------
+# config
+# -----------------------------------------------------------------------------
+
+- name: deploy network configuration files
+  ansible.builtin.template:
+    src: network.j2
+    dest: '/etc/systemd/network/{{ item.name }}.network'
+    owner: root
+    group: root
+    mode: '0644'
+  loop: '{{ systemd_networkd_networks }}'
+  loop_control:
+    label: '{{ item.name }}'
+  become: yes
+  register: __systemd_networkd_configuration
+  when:
+    - systemd_networkd_networks is defined
+  tags:
+    - config
+
+# -----------------------------------------------------------------------------
+# service
+# -----------------------------------------------------------------------------
+
+- name: start systemd-networkd service
+  ansible.builtin.systemd:
+    name: systemd-networkd
+    state: >-
+      {{
+        __systemd_networkd_configuration.changed |
+          default(False) |
+          ternary("restarted", "started")
+      }}
+  become: yes
+  tags:
+    - service
+
+- name: enable systemd-networkd service
+  ansible.builtin.systemd:
+    name: systemd-networkd
+    enabled: yes
+  become: yes
+  tags:
+    - service
+
+...

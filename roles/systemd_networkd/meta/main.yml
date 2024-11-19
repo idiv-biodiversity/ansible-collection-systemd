@@ -1,0 +1,20 @@
+---
+
+galaxy_info:
+  author: Christian Krause
+  description: install and configure systemd-networkd
+  company: German Centre for Integrative Biodiversity Research (iDiv)
+  license: MIT
+  min_ansible_version: '2.9'
+
+  platforms:
+
+    - name: ArchLinux
+      versions:
+        - all
+
+  galaxy_tags:
+    - systemd
+    - networkd
+
+...

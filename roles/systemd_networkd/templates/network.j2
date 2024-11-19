@@ -1,0 +1,50 @@
+# {{ ansible_managed }}
+
+{% if item.match is defined %}
+[Match]
+{% if item.match.name is defined %}
+Name={{ item.match.name }}
+{% endif %}
+{% endif %}
+
+{% if item.network is defined %}
+[Network]
+{% if item.network.address is defined %}
+Address={{ item.network.address }}
+{% endif %}
+{% if item.network.gateway is defined %}
+Gateway={{ item.network.gateway }}
+{% endif %}
+{% if item.network.dhcp is defined %}
+DHCP={{ item.network.dhcp }}
+{% endif %}
+{% if item.network.link_local_addressing is defined %}
+LinkLocalAddressing={{ item.network.link_local_addressing }}
+{% endif %}
+{% if item.network.dns is defined %}
+{% for address in item.network.dns %}
+DNS={{ address }}
+{% endfor %}
+{% endif %}
+{% if item.network.domains is defined %}
+Domains={{ item.network.domains | join(" ") }}
+{% endif %}
+{% if item.network.llmnr is defined %}
+LLMNR={{ item.network.llmnr }}
+{% endif %}
+{% if item.network.multicast_dns is defined %}
+MulticastDNS={{ item.network.multicast_dns }}
+{% endif %}
+{% if item.network.ntp is defined %}
+{% for address in item.network.ntp %}
+NTP={{ address }}
+{% endfor %}
+{% endif %}
+{% endif %}
+
+{% if item.dhcp is defined %}
+[DHCP]
+{% if item.dhcp.route_metric is defined %}
+RouteMetric={{ item.dhcp.route_metric }}
+{% endif %}
+{% endif %}
