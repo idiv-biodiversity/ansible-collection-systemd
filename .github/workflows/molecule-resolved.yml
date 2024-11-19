@@ -1,0 +1,45 @@
+---
+
+name: molecule-resolved
+
+on:
+  pull_request:
+    paths:
+      - .config/molecule
+      - .github/workflows/molecule-resolved.yml
+      - roles/systemd_resolved
+  push:
+    branches:
+      - main
+      - wip/next
+    paths:
+      - .config/molecule
+      - .github/workflows/molecule-resolved.yml
+      - roles/systemd_resolved
+
+jobs:
+
+  molecule:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        distro:
+          - archlinux
+        scenario:
+          - default
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - run: pip3 install ansible molecule molecule-plugins[docker] docker
+      - run: ansible --version
+      - run: molecule --version
+      - run: molecule test -p ${{ matrix.distro }} -s ${{ matrix.scenario }}
+        working-directory: ./roles/systemd_resolved
+        env:
+          ANSIBLE_DIFF_ALWAYS: 'True'
+          PY_COLORS: '1'
+
+...

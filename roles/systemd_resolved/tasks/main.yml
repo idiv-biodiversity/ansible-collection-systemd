@@ -1,0 +1,107 @@
+---
+
+# -----------------------------------------------------------------------------
+# install
+# -----------------------------------------------------------------------------
+
+- name: install systemd
+  ansible.builtin.package:
+    name: systemd
+    state: present
+  become: yes
+  tags:
+    - install
+
+# -----------------------------------------------------------------------------
+# config
+# -----------------------------------------------------------------------------
+
+- name: create conf.d directory
+  ansible.builtin.file:
+    dest: /etc/systemd/resolved.conf.d
+    state: directory
+    owner: root
+    group: root
+    mode: '0755'
+  become: yes
+  tags:
+    - config
+
+- name: configure systemd-resolved
+  ansible.builtin.template:
+    src: resolved.conf.j2
+    dest: /etc/systemd/resolved.conf.d/60-ansible.conf
+    owner: root
+    group: root
+    mode: '0644'
+  become: yes
+  register: __systemd_resolved_configuration
+  tags:
+    - config
+
+# -----------------------------------------------------------------------------
+# service
+# -----------------------------------------------------------------------------
+
+- name: start systemd-resolved service
+  ansible.builtin.systemd:
+    name: systemd-resolved
+    state: >-
+      {{
+        __systemd_resolved_configuration.changed |
+          default(False) |
+          ternary("restarted", "started")
+      }}
+  become: yes
+  tags:
+    - service
+
+- name: enable systemd-resolved service
+  ansible.builtin.systemd:
+    name: systemd-resolved
+    enabled: yes
+  become: yes
+  tags:
+    - service
+
+# -----------------------------------------------------------------------------
+# /etc/resolv.conf
+# -----------------------------------------------------------------------------
+
+- name: remove /etc/resolv.conf mount if running in container
+  ansible.posix.mount:
+    path: /etc/resolv.conf
+    state: unmounted
+  become: yes
+  when: >-
+    ansible_mounts |
+      selectattr('mount', 'equalto', '/etc/resolv.conf') |
+      length
+
+- name: check /etc/resolv.conf
+  ansible.builtin.stat:
+    path: /etc/resolv.conf
+    get_checksum: no
+    get_mime: no
+  register: __etc_resolv_conf
+
+- name: remove /etc/resolv.conf if not yet linked
+  ansible.builtin.file:
+    path: /etc/resolv.conf
+    state: absent
+  become: yes
+  when: >-
+    not __etc_resolv_conf.stat.islnk
+    or
+    not __etc_resolv_conf.stat.lnk_target | default('') ==
+        '/run/systemd/resolve/stub-resolv.conf'
+
+- name: link /etc/resolv.conf to stub
+  ansible.builtin.file:
+    src: /run/systemd/resolve/stub-resolv.conf
+    dest: /etc/resolv.conf
+    state: link
+    force: yes
+  become: yes
+
+...
