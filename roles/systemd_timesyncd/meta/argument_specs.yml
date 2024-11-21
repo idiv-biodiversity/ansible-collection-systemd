@@ -1,0 +1,13 @@
+---
+
+argument_specs:
+  main:
+    options:
+
+      systemd_timesyncd_remove_legacy_packages:
+        type: bool
+
+      systemd_timesyncd_timezone:
+        type: str
+
+...

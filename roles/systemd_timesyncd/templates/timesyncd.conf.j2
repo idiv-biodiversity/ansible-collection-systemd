@@ -1,0 +1,21 @@
+# {{ ansible_managed }}
+
+[Time]
+{% if systemd_timesyncd_ntp_servers is defined %}
+{% if systemd_timesyncd_ntp_servers is iterable and
+      systemd_timesyncd_ntp_servers is not mapping and
+      systemd_timesyncd_ntp_servers is not string %}
+NTP={{ systemd_timesyncd_ntp_servers | join(" ") }}
+{% else %}
+NTP={{ systemd_timesyncd_ntp_servers }}
+{% endif %}
+{% endif %}
+{% if systemd_timesyncd_ntp_fallback_servers is defined %}
+{% if systemd_timesyncd_ntp_fallback_servers is iterable and
+      systemd_timesyncd_ntp_fallback_servers is not mapping and
+      systemd_timesyncd_ntp_fallback_servers is not string %}
+FallbackNTP={{ systemd_timesyncd_ntp_fallback_servers | join(" ") }}
+{% else %}
+FallbackNTP={{ systemd_timesyncd_ntp_fallback_servers }}
+{% endif %}
+{% endif %}

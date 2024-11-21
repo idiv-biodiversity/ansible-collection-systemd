@@ -1,0 +1,5 @@
+---
+
+systemd_timesyncd_remove_legacy_packages: yes
+
+...
