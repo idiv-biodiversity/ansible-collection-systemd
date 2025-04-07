@@ -4,7 +4,6 @@ yaml-files:
   - '*.yaml'
   - '*.yml'
   - '.yamllint'
-  - '.ansible-lint'
 
 extends: default
 
