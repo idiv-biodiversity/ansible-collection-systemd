@@ -17,6 +17,7 @@ documentation: https://github.com/idiv-biodiversity/ansible-collection-systemd
 homepage: https://github.com/idiv-biodiversity/ansible-collection-systemd
 issues: https://github.com/idiv-biodiversity/ansible-collection-systemd/issues
 build_ignore:
+  - .ansible
   - .config
   - .github
   - .yamllint
