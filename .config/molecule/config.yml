@@ -33,7 +33,7 @@ platforms:
     privileged: yes
     pre_build_image: yes
 
-  - name: rocky-9
+  - name: rockylinux-9
     image: dokken/rockylinux-9
     pre_build_image: yes
     privileged: yes
