@@ -5,17 +5,17 @@ name: molecule-resolved
 on:
   pull_request:
     paths:
-      - .config/molecule
+      - .config/molecule/**
       - .github/workflows/molecule-resolved.yml
-      - roles/systemd_resolved
+      - roles/systemd_resolved/**
   push:
     branches:
       - main
       - wip/next
     paths:
-      - .config/molecule
+      - .config/molecule/**
       - .github/workflows/molecule-resolved.yml
-      - roles/systemd_resolved
+      - roles/systemd_resolved/**
 
 jobs:
 

@@ -5,17 +5,17 @@ name: molecule-networkd
 on:
   pull_request:
     paths:
-      - .config/molecule
+      - .config/molecule/**
       - .github/workflows/molecule-networkd.yml
-      - roles/systemd_networkd
+      - roles/systemd_networkd/**
   push:
     branches:
       - main
       - wip/next
     paths:
-      - .config/molecule
+      - .config/molecule/**
       - .github/workflows/molecule-networkd.yml
-      - roles/systemd_networkd
+      - roles/systemd_networkd/**
 
 jobs:
 

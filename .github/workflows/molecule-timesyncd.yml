@@ -5,17 +5,17 @@ name: molecule-timesyncd
 on:
   pull_request:
     paths:
-      - .config/molecule
+      - .config/molecule/**
       - .github/workflows/molecule-timesyncd.yml
-      - roles/systemd_timesyncd
+      - roles/systemd_timesyncd/**
   push:
     branches:
       - main
       - wip/next
     paths:
-      - .config/molecule
+      - .config/molecule/**
       - .github/workflows/molecule-timesyncd.yml
-      - roles/systemd_timesyncd
+      - roles/systemd_timesyncd/**
 
 jobs:
 

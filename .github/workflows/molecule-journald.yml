@@ -5,17 +5,17 @@ name: molecule-journald
 on:
   pull_request:
     paths:
-      - .config/molecule
+      - .config/molecule/**
       - .github/workflows/molecule-journald.yml
-      - roles/systemd_journald
+      - roles/systemd_journald/**
   push:
     branches:
       - main
       - wip/next
     paths:
-      - .config/molecule
+      - .config/molecule/**
       - .github/workflows/molecule-journald.yml
-      - roles/systemd_journald
+      - roles/systemd_journald/**
 
 jobs:
 
