@@ -88,4 +88,17 @@
           - __systemd_timesyncd_service.enabled
         success_msg: 'service is enabled'
 
+    # -------------------------------------------------------------------------
+    # check commands
+    # -------------------------------------------------------------------------
+
+    - name: 'check if `timedatectl status` works'
+      ansible.builtin.command: timedatectl status
+      changed_when: no
+      register: __systemd_timesyncd_timedatectl_status
+
+    - name: 'debug `timedatectl status`'
+      ansible.builtin.debug:
+        var: __systemd_timesyncd_timedatectl_status
+
 ...
