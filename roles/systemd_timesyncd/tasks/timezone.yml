@@ -1,0 +1,29 @@
+---
+
+- name: run timedatectl list-timezones
+  ansible.builtin.command: timedatectl list-timezones
+  check_mode: no
+  changed_when: no
+  register: __systemd_timesyncd_timezones
+
+- name: show timedatectl list-timezones result
+  ansible.builtin.debug:
+    var: __systemd_timesyncd_timezones
+
+- name: assert that timezone is available
+  ansible.builtin.assert:
+    that:
+      - not __systemd_timesyncd_timezones.failed
+      - >-
+        systemd_timesyncd_timezone
+        in
+        __systemd_timesyncd_timezones.stdout_lines
+    success_msg: 'timezone {{ systemd_timesyncd_timezone }} is installed'
+    fail_msg: 'timezone {{ systemd_timesyncd_timezone }} is not installed'
+
+- name: set timezone
+  community.general.timezone:
+    name: '{{ systemd_timesyncd_timezone }}'
+  become: yes
+
+...

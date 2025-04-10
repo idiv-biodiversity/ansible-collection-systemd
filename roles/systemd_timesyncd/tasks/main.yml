@@ -4,14 +4,20 @@
   ansible.builtin.include_vars: >-
     {{ lookup("ansible.builtin.first_found", __systemd_timesyncd_vars_files) }}
 
-- name: set time zone
-  community.general.timezone:
-    name: '{{ systemd_timesyncd_timezone }}'
-  become: yes
+# -----------------------------------------------------------------------------
+# timezone
+# -----------------------------------------------------------------------------
+
+- name: include timezone tasks
   when:
     - systemd_timesyncd_timezone is defined
+  ansible.builtin.include_tasks:
+    file: timezone.yml
+    apply:
+      tags:
+        - systemd-timesyncd-timezone
   tags:
-    - timezone
+    - systemd-timesyncd-timezone
 
 # -----------------------------------------------------------------------------
 # install
