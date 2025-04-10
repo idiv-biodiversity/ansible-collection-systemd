@@ -3,6 +3,7 @@ Ansible Role: systemd_networkd
 
 An Ansible role that configures **systemd-networkd**.
 
+
 Table of Contents
 -----------------
 
@@ -16,13 +17,14 @@ Table of Contents
 
 <!-- tocstop -->
 
+
 Role Variables
 --------------
 
 For a detailed description see `man 5 systemd.network`.
 
 **Note:** This role doesn't aim to be 100% complete at all times. When new
-variables are introduced and you need them feel free to contribute.
+variables are introduced and you need them, feel free to contribute.
 
 ```yml
 ---
