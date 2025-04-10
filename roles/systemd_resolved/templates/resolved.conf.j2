@@ -64,11 +64,7 @@ Cache={{ systemd_resolved_cache }}
 {% endif %}
 {% endif %}
 {% if systemd_resolved_cache_from_localhost is defined %}
-{% if systemd_resolved_cache_from_localhost is boolean %}
 CacheFromLocalhost={{ systemd_resolved_cache_from_localhost | ternary('yes', 'no') }}
-{% else %}
-CacheFromLocalhost={{ systemd_resolved_cache_from_localhost }}
-{% endif %}
 {% endif %}
 {% if systemd_resolved_dns_stub_listener is defined %}
 {% if systemd_resolved_dns_stub_listener is boolean %}
@@ -81,18 +77,10 @@ DNSStubListener={{ systemd_resolved_dns_stub_listener }}
 DNSStubListenerExtra={{ systemd_resolved_dns_stub_listener_extra }}
 {% endif %}
 {% if systemd_resolved_read_etc_hosts is defined %}
-{% if systemd_resolved_read_etc_hosts is boolean %}
 ReadEtcHosts={{ systemd_resolved_read_etc_hosts | ternary('yes', 'no') }}
-{% else %}
-ReadEtcHosts={{ systemd_resolved_read_etc_hosts }}
-{% endif %}
 {% endif %}
 {% if systemd_resolved_resolve_unicast_single_label is defined %}
-{% if systemd_resolved_resolve_unicast_single_label is boolean %}
 ResolveUnicastSingleLabel={{ systemd_resolved_resolve_unicast_single_label | ternary('yes', 'no') }}
-{% else %}
-ResolveUnicastSingleLabel={{ systemd_resolved_resolve_unicast_single_label }}
-{% endif %}
 {% endif %}
 {% if systemd_resolved_stale_retention_sec is defined %}
 StaleRetentionSec={{ systemd_resolved_stale_retention_sec }}

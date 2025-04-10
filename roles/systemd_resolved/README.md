@@ -3,6 +3,7 @@ Ansible Role: systemd_resolved
 
 An Ansible role that configures **systemd-resolved**.
 
+
 Table of Contents
 -----------------
 
@@ -15,6 +16,7 @@ Table of Contents
   * [Role Dependency](#role-dependency)
 
 <!-- tocstop -->
+
 
 Role Variables
 --------------

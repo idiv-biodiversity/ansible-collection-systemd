@@ -1,0 +1,49 @@
+---
+
+argument_specs:
+  main:
+    options:
+
+      systemd_resolved_cache:
+        type: raw
+
+      systemd_resolved_cache_from_localhost:
+        type: bool
+
+      systemd_resolved_dns_over_tls:
+        type: raw
+
+      systemd_resolved_dns_stub_listener:
+        type: raw
+
+      systemd_resolved_dns_stub_listener_extra:
+        type: str
+
+      systemd_resolved_dnssec:
+        type: raw
+
+      systemd_resolved_domains:
+        type: raw
+
+      systemd_resolved_fallback_servers:
+        type: raw
+
+      systemd_resolved_llmnr:
+        type: raw
+
+      systemd_resolved_multicast_dns:
+        type: raw
+
+      systemd_resolved_read_etc_hosts:
+        type: bool
+
+      systemd_resolved_resolve_unicast_single_label:
+        type: bool
+
+      systemd_resolved_servers:
+        type: raw
+
+      systemd_resolved_stale_retention_sec:
+        type: int
+
+...
