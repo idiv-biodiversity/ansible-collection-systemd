@@ -17,17 +17,16 @@ Table of Contents
 
 <!-- tocstop -->
 
+
 Role Variables
 --------------
 
-Role variables include journald configuration variables as documented in detail
-at [freedesktop.org][freedesktop/journald] or `man 5 journald.conf`. Each role
-variable has the `systemd_journald_` prefix, and is named accordingly, e.g.
-`MaxRetentionSec=` maps to the `systemd_journald_maxretensionsec` role
-variable.
+Role variables use the names of the `journald.conf` variables as documented in
+`man 5 journald.conf`, prefixed with `systemd_journald_`, e.g.
+`MaxRetentionSec` maps to `systemd_journald_maxretensionsec`.
 
 **Note:** This role doesn't aim to be 100% complete at all times. When new
-variables are introduced and you need them feel free to contribute.
+variables are introduced and you need them, feel free to contribute.
 
 
 Dependencies
@@ -85,6 +84,3 @@ dependencies:
 
 ...
 ```
-
-
-[freedesktop/journald](https://www.freedesktop.org/software/systemd/man/journald.conf.html)

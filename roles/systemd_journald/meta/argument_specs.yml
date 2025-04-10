@@ -5,22 +5,22 @@ argument_specs:
     options:
 
       systemd_journald_audit:
-        type: bool
+        type: str
 
       systemd_journald_compress:
-        type: bool
+        type: str
 
       systemd_journald_forwardtoconsole:
-        type: bool
+        type: str
 
       systemd_journald_forwardtokmsg:
-        type: bool
+        type: str
 
       systemd_journald_forwardtosyslog:
-        type: bool
+        type: str
 
       systemd_journald_forwardtowall:
-        type: bool
+        type: str
 
       systemd_journald_linemax:
         type: str
@@ -53,7 +53,7 @@ argument_specs:
         type: str
 
       systemd_journald_readkmsg:
-        type: bool
+        type: str
 
       systemd_journald_runtimekeepfree:
         type: str
@@ -68,7 +68,7 @@ argument_specs:
         type: str
 
       systemd_journald_seal:
-        type: bool
+        type: str
 
       systemd_journald_splitmode:
         type: str
