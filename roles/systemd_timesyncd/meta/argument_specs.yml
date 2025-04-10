@@ -4,6 +4,14 @@ argument_specs:
   main:
     options:
 
+      systemd_timesyncd_ntp_fallback_servers:
+        type: list
+        elements: str
+
+      systemd_timesyncd_ntp_servers:
+        type: list
+        elements: str
+
       systemd_timesyncd_remove_legacy_packages:
         type: bool
 
