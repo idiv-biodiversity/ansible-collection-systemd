@@ -30,7 +30,8 @@ jobs:
       matrix:
         distro:
           - name: archlinux
-            ansible: 2.18
+            ansible: '2.20'
+            python: '>=3.12 <3.15'
         scenario:
           - default
 
@@ -38,7 +39,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: ${{ matrix.distro.python }}
       - run: >-
           pip3 install
           ansible-core~=${{ matrix.distro.ansible }}.0
