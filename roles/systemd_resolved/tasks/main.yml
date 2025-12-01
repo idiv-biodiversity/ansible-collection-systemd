@@ -73,10 +73,11 @@
     path: /etc/resolv.conf
     state: unmounted
   become: yes
-  when: >-
-    ansible_mounts |
-      selectattr('mount', 'equalto', '/etc/resolv.conf') |
-      length
+  when:
+    - >-
+      ansible_mounts |
+        selectattr('mount', 'equalto', '/etc/resolv.conf') |
+        length > 0
 
 - name: check /etc/resolv.conf
   ansible.builtin.stat:
