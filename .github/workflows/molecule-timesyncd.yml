@@ -17,6 +17,10 @@ on:
       - .github/workflows/molecule-timesyncd.yml
       - roles/systemd_timesyncd/**
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
 jobs:
 
   molecule:
