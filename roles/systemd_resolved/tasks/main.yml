@@ -84,7 +84,7 @@
     path: /etc/resolv.conf
     get_checksum: no
     get_mime: no
-  register: __etc_resolv_conf
+  register: __systemd_resolved_etc_resolv_conf
 
 - name: remove /etc/resolv.conf if not yet linked
   ansible.builtin.file:
@@ -92,9 +92,9 @@
     state: absent
   become: yes
   when: >-
-    not __etc_resolv_conf.stat.islnk
+    not __systemd_resolved_etc_resolv_conf.stat.islnk
     or
-    not __etc_resolv_conf.stat.lnk_target | default('') ==
+    not __systemd_resolved_etc_resolv_conf.stat.lnk_target | default('') ==
         '/run/systemd/resolve/stub-resolv.conf'
 
 - name: link /etc/resolv.conf to stub
