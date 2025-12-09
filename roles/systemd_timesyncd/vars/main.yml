@@ -5,16 +5,16 @@
 # -----------------------------------------------------------------------------
 
 __systemd_timesyncd_distro: >-
-  {{ ansible_distribution | lower }}
+  {{ ansible_facts["distribution"] | lower }}
 
 __systemd_timesyncd_os: >-
-  {{ ansible_os_family | lower }}
+  {{ ansible_facts["os_family"] | lower }}
 
 __systemd_timesyncd_distro_version: >-
-  {{ __systemd_timesyncd_distro }}_{{ ansible_distribution_major_version }}
+  {{ __systemd_timesyncd_distro }}_{{ ansible_facts["distribution_major_version"] }}
 
 __systemd_timesyncd_os_version: >-
-  {{ __systemd_timesyncd_os }}_{{ ansible_distribution_major_version }}
+  {{ __systemd_timesyncd_os }}_{{ ansible_facts["distribution_major_version"] }}
 
 # -----------------------------------------------------------------------------
 # first found snippets
