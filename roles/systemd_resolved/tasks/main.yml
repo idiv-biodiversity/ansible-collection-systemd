@@ -75,7 +75,7 @@
   become: yes
   when:
     - >-
-      ansible_mounts |
+      ansible_facts.mounts |
         selectattr('mount', 'equalto', '/etc/resolv.conf') |
         length > 0
 
