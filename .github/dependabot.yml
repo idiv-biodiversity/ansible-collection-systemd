@@ -12,5 +12,7 @@ updates:
       time: '06:00'
     assignees:
       - wookietreiber
+    cooldown:
+      default-days: 7
 
 ...
