@@ -34,6 +34,8 @@ rules:
   line-length:
     max: 79
     allow-non-breakable-words: yes
+    ignore: >-
+      .github/workflows
   new-lines:
     type: unix
   octal-values:

@@ -1,0 +1,9 @@
+---
+
+rules:
+  unpinned-uses:
+    config:
+      policies:
+        "wookietreiber/workflows/*": any
+
+...
