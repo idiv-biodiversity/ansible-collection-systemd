@@ -1,0 +1,22 @@
+---
+
+name: zizmor
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/*.yml
+  push:
+    branches:
+      - main
+      - wip/next
+    paths:
+      - .github/workflows/*.yml
+
+jobs:
+  zizmor:
+    uses: wookietreiber/workflows/.github/workflows/zizmor.yml@main
+    with:
+      persona: auditor
+
+...
