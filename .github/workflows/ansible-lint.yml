@@ -21,6 +21,8 @@ on:
       - meta/**
       - roles/**
 
+permissions: {}
+
 jobs:
 
   ansible-lint:
