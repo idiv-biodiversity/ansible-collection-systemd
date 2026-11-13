@@ -1,0 +1,81 @@
+---
+
+- name: verify
+  hosts: all
+  tasks:
+
+    # -------------------------------------------------------------------------
+    # check service
+    # -------------------------------------------------------------------------
+
+    - name: check service
+      ansible.builtin.service:
+        name: uname-timer.service
+        enabled: yes
+      check_mode: yes
+      register: __systemd_timer_service
+
+    - name: debug service
+      ansible.builtin.debug:
+        var: __systemd_timer_service
+
+    - name: assert on service
+      ansible.builtin.assert:
+        that:
+          - not __systemd_timer_service.failed
+          - not __systemd_timer_service.changed
+          - __systemd_timer_service.enabled
+        success_msg: 'service is enabled'
+
+    # -------------------------------------------------------------------------
+    # check timer
+    # -------------------------------------------------------------------------
+
+    - name: check timer
+      ansible.builtin.service:
+        name: uname-timer.timer
+        enabled: yes
+      check_mode: yes
+      register: __systemd_timer_timer
+
+    - name: debug timer
+      ansible.builtin.debug:
+        var: __systemd_timer_timer
+
+    - name: assert on timer
+      ansible.builtin.assert:
+        that:
+          - not __systemd_timer_timer.failed
+          - not __systemd_timer_timer.changed
+          - __systemd_timer_timer.enabled
+        success_msg: 'timer is enabled'
+
+    # -------------------------------------------------------------------------
+    # check commands
+    # -------------------------------------------------------------------------
+
+    - name: fetch timer output
+      ansible.builtin.slurp:
+        src: /tmp/uname-a
+      register: __systemd_timer_output
+
+    - name: show timer output
+      ansible.builtin.debug:
+        var: __systemd_timer_output
+
+    - name: set output content
+      ansible.builtin.set_fact:
+        __systemd_timer_output_content: >-
+          {{ __systemd_timer_output.content | b64decode }}
+
+    - name: show timer output
+      ansible.builtin.debug:
+        var: __systemd_timer_output_content
+
+    - name: assert on timer output
+      ansible.builtin.assert:
+        that:
+          - "'Linux' in __systemd_timer_output_content"
+        success_msg: 'timer output was generated'
+
+...

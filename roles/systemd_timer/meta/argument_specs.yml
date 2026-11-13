@@ -1,0 +1,82 @@
+---
+
+argument_specs:
+  main:
+    options:
+
+      systemd_timer_enable:
+        type: bool
+
+      systemd_timer_environment:
+        type: list
+        elements: dict
+        options:
+          key:
+            required: yes
+            type: str
+          value:
+            required: yes
+            type: str
+
+      systemd_timer_exec_start:
+        type: list
+        elements: str
+
+      systemd_timer_group:
+        type: str
+
+      systemd_timer_limits:
+        type: list
+        elements: dict
+        options:
+          name:
+            required: yes
+            type: str
+          value:
+            required: yes
+            type: str
+
+      systemd_timer_name:
+        type: str
+
+      systemd_timer_on_active_sec:
+        type: str
+
+      systemd_timer_on_boot_sec:
+        type: str
+
+      systemd_timer_on_calendar:
+        type: str
+
+      systemd_timer_on_startup_sec:
+        type: str
+
+      systemd_timer_on_unit_active_sec:
+        type: str
+
+      systemd_timer_on_unit_inactive_sec:
+        type: str
+
+      systemd_timer_scripts:
+        type: list
+        elements: dict
+        options:
+          src:
+            required: yes
+            type: str
+          dest:
+            required: yes
+            type: str
+          may_fail:
+            type: bool
+
+      systemd_timer_start:
+        type: bool
+
+      systemd_timer_user:
+        type: str
+
+      systemd_timer_working_directory:
+        type: str
+
+...

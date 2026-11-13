@@ -1,0 +1,34 @@
+# {{ ansible_managed }}
+[Unit]
+Description={{ systemd_timer_name | regex_replace('-', ' ') }}
+
+[Service]
+Type=oneshot
+{% if systemd_timer_working_directory is defined %}
+WorkingDirectory={{ systemd_timer_working_directory }}
+{% endif %}
+
+User={{ systemd_timer_user | default('root') }}
+Group={{ systemd_timer_group | default('root') }}
+
+{% if systemd_timer_limits is defined %}
+{% for limit in systemd_timer_limits %}
+Limit{{ limit.name }}={{ limit.value }}
+{% endfor %}
+
+{% endif %}
+{% if systemd_timer_environment is defined %}
+{% for env in systemd_timer_environment %}
+Environment={{ env.key }}={{ env.value }}
+{% endfor %}
+
+{% endif %}
+{% if systemd_timer_exec_start is defined %}
+{% for script in systemd_timer_exec_start %}
+ExecStart={{ script }}
+{% endfor %}
+{% else %}
+{% for script in systemd_timer_scripts %}
+ExecStart={% if script.may_fail | default(False)%}-{% endif %}{{ script.dest }}
+{% endfor %}
+{% endif %}

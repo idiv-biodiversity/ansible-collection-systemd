@@ -1,0 +1,42 @@
+---
+
+- name: 'install scripts for {{ systemd_timer_name }}'
+  ansible.builtin.template:
+    src: '{{ item.src }}'
+    dest: '{{ item.dest }}'
+    owner: '{{ item.owner | default("root") }}'
+    group: '{{ item.group | default("root") }}'
+    mode: '{{ item.mode | default("0755") }}'
+    validate: '{{ item.validate | default(omit) }}'
+  when:
+    - systemd_timer_scripts is defined
+  loop: '{{ systemd_timer_scripts }}'
+
+- name: 'install service for {{ systemd_timer_name }}'
+  ansible.builtin.template:
+    src: service.ini.j2
+    dest: '/etc/systemd/system/{{ systemd_timer_name }}.service'
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: 'install timer for {{ systemd_timer_name }}'
+  ansible.builtin.template:
+    src: timer.ini.j2
+    dest: '/etc/systemd/system/{{ systemd_timer_name }}.timer'
+    owner: root
+    group: root
+    mode: '0644'
+
+- name: 'enable and start {{ systemd_timer_name }}'
+  ansible.builtin.systemd:
+    name: '{{ systemd_timer_name }}.timer'
+    state: >-
+      {{ systemd_timer_start | default(True) | ternary('started', 'stopped') }}
+    enabled: >-
+      {{ systemd_timer_enable | default(True) }}
+    daemon_reload: yes
+  tags:
+    - service
+
+...
