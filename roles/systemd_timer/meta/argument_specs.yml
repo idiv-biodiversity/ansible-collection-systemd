@@ -67,6 +67,14 @@ argument_specs:
           dest:
             required: yes
             type: str
+          owner:
+            type: str
+          group:
+            type: str
+          mode:
+            type: str
+          validate:
+            type: str
           may_fail:
             type: bool
 
