@@ -66,10 +66,12 @@ jobs:
       -
         run: >-
           pip3 install
-          ansible-core~=${{ matrix.distro.ansible }}.0
+          ansible-core~=${__MATRIX_ANSIBLE_VERSION}
           docker
           molecule
           molecule-plugins[docker]
+        env:
+          __MATRIX_ANSIBLE_VERSION: ${{ matrix.distro.ansible }}.0
       -
         run: ansible --version
       -
@@ -77,10 +79,12 @@ jobs:
       -
         run: >-
           molecule test
-          -p ${{ matrix.distro.name }}
-          -s ${{ matrix.scenario }}
+          -p ${__MATRIX_DISTRO_NAME}
+          -s ${__MATRIX_SCENARIO}
         working-directory: ./roles/systemd_journald
         env:
+          __MATRIX_DISTRO_NAME: ${{ matrix.distro.name }}
+          __MATRIX_SCENARIO: ${{ matrix.scenario }}
           ANSIBLE_DIFF_ALWAYS: 'True'
           PY_COLORS: '1'
 
